@@ -1,3 +1,4 @@
+import logging
 import string
 from pathlib import Path
 
@@ -7,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
+LOGGER = logging.getLogger(__name__)
 
 def config():
     path = Path(__file__).parent / "../conf/config.yaml"
@@ -17,16 +19,20 @@ def config():
     finally:
         config_file.close()
 
+
 @pytest.fixture
 def driver(request):
     conf = config()
     assert_chrome_browser(conf['browser'])
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=prepare_browser_options(conf))
     driver.implicitly_wait(10)
+    LOGGER.info("Webdriver started.")
     yield driver
     # TODO: Screenshot
     driver.close()
     driver.quit()
+    LOGGER.info("Webdriver terminated.")
+
 
 def prepare_browser_options(conf):
     options = None
@@ -38,6 +44,7 @@ def prepare_browser_options(conf):
                 "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19"
             }
             options.add_experimental_option("mobileEmulation", mobile_emulation)
+            LOGGER.info("Mobile emulation enabled.")
 
     return options
 
