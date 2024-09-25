@@ -1,0 +1,9 @@
+
+# IDE directory
+.idea/
+
+# Results and screenshots
+results/*
+screenshots/*
+
+*__pycache__*
