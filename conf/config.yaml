@@ -1,1 +1,3 @@
 browser: chrome
+mobile_emulation:
+  enabled: true
