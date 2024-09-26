@@ -17,12 +17,6 @@ def test_mobile_search(driver):
     LOGGER.info(f"Visiting {twitch_page.get_mobile_url()}.")
     driver.get(twitch_page.get_mobile_url())
 
-    try:
-        twitch_page.dismiss_popup()
-        LOGGER.info("Popup dismissed.")
-    except Exception:
-        LOGGER.info("No popup dismiss button shown.")
-
     LOGGER.info(f"Searching for {SEARCH_TERM}")
     twitch_page.search(SEARCH_TERM)
     assert twitch_page.get_search_input().get_attribute('value') == SEARCH_TERM, \
@@ -46,6 +40,12 @@ def test_mobile_search(driver):
         """
     assert len(twitch_page.get_videoplayer_elements()) > 0 , "No video player elements present."
     LOGGER.info(f"Successfully redirected to stream page.")
+
+    try:
+        twitch_page.dismiss_popup()
+        LOGGER.info("Popup dismissed.")
+    except Exception:
+        LOGGER.info("No popup dismiss button shown.")
 
 
 def skip_non_mobile_test(driver):

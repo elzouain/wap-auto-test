@@ -3,7 +3,8 @@
 A test project using Python, Selenium WebDriver and the Page Object Model design pattern.
 
 # Scenarios:
-1. Go to [Twitch.com](<https://www.twitch.com>) in <b>mobile view</b>, perform a search, scroll a couple of times, and take a screenshot once the page loads.
+1. Go to [Twitch.com](<https://www.twitch.com>) in <b>mobile view</b>, perform a search, scroll down a couple of times, 
+click on one result, wait for the page to load, dismiss popup, and take a screenshot.
 
 # Requirements
 
@@ -16,16 +17,21 @@ A test project using Python, Selenium WebDriver and the Page Object Model design
 
 # Installation
 
-1. Go to this project's root directory.
-2. Install dependencies `pip install -r requirements.txt`
-3. Activate the virtual environment `source ./.venv/bin/activate` (UNIX systems).
-4. Optional: You might need to change executable permissions `sudo chmod 777 ./.venv/bin/activate` and try step 3 again.
-5. Run `deactivate` to exit the virtual environment.
+1. Clone the repository `git clone https://github.com/elzouain/wap-auto-test.git`
+2. Change to this project's root directory `cd wap-auto-test`
+3. Run `python3 -m venv .venv` to create the `./.venv/` directory. 
+If you get an error, use `sudo apt install python3.10-venv` and try again.
+4. Change the executable permissions of the virtual environment activation script `sudo chmod 777 ./.venv/bin/activate`
+5. Activate the virtual environment `source ./.venv/bin/activate` (UNIX systems). 
+You should see `(.venv)` next to the terminal prompt.
+6. Within the virtual environment, install the necessary dependencies `pip install -r requirements.txt`
+7. To exit the virtual environment run `deactivate`.
 
 # Test Execution
 
 1. Open a terminal
 2. From the project root directory run `pytest -v --html=results/report.html`
+ 
 
 # Screenshots
 

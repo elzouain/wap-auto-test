@@ -58,7 +58,9 @@ def assert_chrome_browser(browser_name: string):
 
 
 def take_screenshot(driver: WebDriver, screenshot_name: string, format: string):
-    screenshots_path = Path(f"{os.path.dirname(main.__file__)}/screenshots/{screenshot_name}.{format.lower()}")
+    screenshots_path = f"{os.path.dirname(main.__file__)}/screenshots/"
+    Path(screenshots_path).mkdir(parents=True, exist_ok=True)
+    screenshots_path = Path(f"{screenshots_path}{screenshot_name}.{format.lower()}")
     LOGGER.info(f"Saving screenshot in {screenshots_path}")
     driver.get_screenshot_as_file(f"{screenshots_path}")
 
