@@ -32,6 +32,7 @@ You should see `(.venv)` next to the terminal prompt.
 1. Open a terminal
 2. From the project root directory run `pytest -v --html=results/report.html`
  
+![](https://github.com/elzouain/wap-auto-test/blob/master/conf/assets/wap-auto-test-recording.gif)
 
 # Screenshots
 
