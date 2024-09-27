@@ -21,12 +21,6 @@ def perform_streamer_search(page: TwitchPage, attempts=0):
         LOGGER.info(f"Visiting {page.get_mobile_url()}.")
         page.driver.get(page.get_mobile_url())
 
-        try:
-            page.dismiss_popup()
-            LOGGER.info("Popup dismissed.")
-        except:
-            LOGGER.info("No popup dismiss button shown.")
-
         LOGGER.info(f"Searching for {SEARCH_TERM}")
         page.search(SEARCH_TERM)
         assert page.get_search_input().get_attribute('value') == SEARCH_TERM, \
@@ -69,10 +63,9 @@ def eval_attempts(attempts):
     if attempts == MAX_ATTEMPTS:
         raise Exception(f"Unable to search for streamer. Max attempts reached {attempts}")
 
-
-def dismiss_popup(page: TwitchPage):
+def dismiss_popup(page:TwitchPage):
     try:
         page.dismiss_popup()
         LOGGER.info("Popup dismissed.")
-    except Exception:
+    except:
         LOGGER.info("No popup dismiss button shown.")
