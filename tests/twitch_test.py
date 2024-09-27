@@ -52,16 +52,12 @@ def perform_streamer_search(page: TwitchPage, attempts=0):
         assert len(page.get_videoplayer_elements()) > 0, "No video player elements present."
         LOGGER.info(f"Successfully redirected to stream page.")
 
+        dismiss_popup(page)
+
     except:
         attempts = attempts + 1
         LOGGER.info(f"Failed to search. Retrying [{attempts}/{MAX_ATTEMPTS}]")
         perform_streamer_search(page, attempts)
-
-    try:
-        page.dismiss_popup()
-        LOGGER.info("Popup dismissed.")
-    except Exception:
-        LOGGER.info("No popup dismiss button shown.")
 
 
 def skip_non_mobile_test(driver):
@@ -72,3 +68,11 @@ def skip_non_mobile_test(driver):
 def eval_attempts(attempts):
     if attempts == MAX_ATTEMPTS:
         raise Exception(f"Unable to search for streamer. Max attempts reached {attempts}")
+
+
+def dismiss_popup(page: TwitchPage):
+    try:
+        page.dismiss_popup()
+        LOGGER.info("Popup dismissed.")
+    except Exception:
+        LOGGER.info("No popup dismiss button shown.")
